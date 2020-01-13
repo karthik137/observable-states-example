@@ -32,9 +32,10 @@ class TradeAndReport(
         val sessions = listOf(initiateFlow(buyer), initiateFlow(stateRegulator))
 
         // We distribute the transaction to both the buyer and the state regulator using 'Finality Flow'
-        return subFlow(FinalityFlow(signedTransaction, sessions))
+        //subFlow(FinalityFlow(signedTransaction, sessions))
         // We also distribute the transaction to the national regulator manually
-        //subFlow(ReportManually(signedTransaction, sessions))
+        subFlow(ReportManually(signedTransaction, nationalRegulator))
+        return subFlow(FinalityFlow(signedTransaction, sessions))
     }
 
 
